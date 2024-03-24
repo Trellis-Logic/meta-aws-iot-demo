@@ -11,7 +11,13 @@ if [ ! -b "$sdcard" ]; then
     exit 1
 fi
 cd $(dirname $0)/../
-imgfile=../build/tmp/deploy/images/raspberrypi3/rauc-aws-demo-image-raspberrypi3.wic.bz2
+base=$(basename $0 .sh)
+machine="${base##*-}"
+if [ ! -z "${machine}" ]; then
+    echo "building for machine ${machine}"
+    export KAS_MACHINE=${machine}
+fi
+imgfile=../build/tmp/deploy/images/${KAS_MACHINE}/rauc-aws-demo-image-${KAS_MACHINE}.wic.bz2
 if [ ! -e "$imgfile" ]; then
     echo "$imgfile does not exist, please build first"
     exit 1
