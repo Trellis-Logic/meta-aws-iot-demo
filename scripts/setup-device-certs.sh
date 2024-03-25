@@ -48,5 +48,7 @@ if [ ! -e ${tmpdir}/device-environment.env ]; then
 fi
 chmod 644 ${tmpdir}/device-environment.env
 echo "Copying ${tmpdir} content to ${device}"
-scp -p ${tmpdir}/* root@${device}:/etc/aws-iot-device-client/thing/
+ssh root@${device} "mount -oremount,rw /production && mkdir -p /production/aws-iot-device-client && chmod 700 /production/aws-iot-device-client"
+scp -p ${tmpdir}/* root@${device}:/production/aws-iot-device-client/
+ssh root@${device} "mount -oremount,ro /production"
 rm -rf ${tmpdir}

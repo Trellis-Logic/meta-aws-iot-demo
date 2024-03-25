@@ -7,4 +7,4 @@ if [ ! -z "${machine}" ]; then
     echo "building for machine ${machine}"
     export KAS_MACHINE=${machine}
 fi
-kas build --update ${base_repo_path}/conf/kas/rpi3-rauc-aws.yml
+kas build --update ${base_repo_path}/conf/kas/rpi-rauc-aws.yml

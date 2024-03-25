@@ -43,7 +43,7 @@ repos:
   meta-rauc-community:
     url: https://github.com/Trellis-Logic/meta-rauc-community
     path: layers/meta-rauc-community
-    refspec: kirkstone+rpi-use-machine-var
+    refspec: kirkstone+rpi-tweaks
     layers:
       meta-rauc-raspberrypi:
 
@@ -87,6 +87,7 @@ local_conf_header:
     DISTRO_FEATURES:append = " rauc"
     INIT_MANAGER = "systemd"
     RAUC_TARGET_IMAGE ?= "rauc-aws-demo-image"
+    ROOTFSPART_SIZE ?= "1G"
     AWS_CREDENTIALS_ENDPOINT ?= "please_define_in_localconf_or_env"
     AWSIOT_ENDPOINT ?= "please_define_in_localconf_or_env"
-    ROOTFSPART_SIZE ?= "1G"
+

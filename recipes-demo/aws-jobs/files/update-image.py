@@ -7,8 +7,8 @@ import requests
 import sys
 import tmpfile
 
-AWS_ENV_FILE_PATH = '/etc/aws-iot-device-client/thing/aws-environment.env'
-AWS_DEVICE_ENV_FILE_PATH = '/etc/aws-iot-device-client/thing/device-environment.env'
+AWS_ENV_FILE_PATH = '/etc/.aws-iot-device-client/aws-environment.env'
+AWS_DEVICE_ENV_FILE_PATH = '/production/aws-iot-device-client/device-environment.env'
 
 # Set this to your desired image updater
 IMAGE_UPDATER = "rauc"
