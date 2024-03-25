@@ -7,8 +7,8 @@ target:
   - update-bundle
 
 repos:
-  meta-rpi-rauc-aws-demo:
-    path: meta-rpi-rauc-aws-demo
+  meta-aws-iot-demo:
+    path: meta-aws-iot-demo
 
   meta-raspberry:
     url: https://github.com/agherzan/meta-raspberrypi
