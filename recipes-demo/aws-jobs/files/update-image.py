@@ -5,7 +5,6 @@ import subprocess
 import os
 import requests
 import sys
-import tmpfile
 
 AWS_ENV_FILE_PATH = '/etc/.aws-iot-device-client/aws-environment.env'
 AWS_DEVICE_ENV_FILE_PATH = '/production/aws-iot-device-client/device-environment.env'
@@ -15,7 +14,7 @@ IMAGE_UPDATER = "rauc"
 IMAGE_UPDATE_FILE_COMMAND = []
 IMAGE_UPDATE_STREAM_COMMAND= []
 
-if IMAGE_UPDATER == "rauc"
+if IMAGE_UPDATER == "rauc":
     IMAGE_UPDATE_FILE_COMMAND = ['/usr/bin/rauc','install']
 
 if IMAGE_UPDATER == "fwup":
@@ -73,7 +72,7 @@ def obtain_temporary_credentials():
         print('error requesting temporary access to AWS S3')
         return '', '', ''
 
-def stream_s3_download_to_image_updater(bucket_file : str):
+def download_s3_and_update_image(bucket_file : str):
     """
     Stream an S3 object download into an image update command.
 
@@ -87,12 +86,12 @@ def stream_s3_download_to_image_updater(bucket_file : str):
     print(f'Obtaining temp credentials for file {bucket_file}')
     access_key_id, secrete_access_key, session_token = obtain_temporary_credentials()
 
-    temp_dir = tempfile.mkdtemp()
+    temp_dir = '/var/volatile/tmp/'
 
     bucket, key = bucket_file.replace("s3://", "").split("/", 1)
     temp_file_path = os.path.join(temp_dir, os.path.basename(key))
     process = None
-    update_command = IMAGE_UPDATE_STREAM_COMMAND
+    update_command = IMAGE_UPDATE_FILE_COMMAND
     update_command.append(temp_file_path)
     print(f"Obtaining file from {bucket}/{key} and passing to {' '.join(update_command)}")
     
@@ -107,17 +106,17 @@ def stream_s3_download_to_image_updater(bucket_file : str):
     print(f"File downloaded successfully to {temp_file_path}")
     # Run the shell command, appending the temp file path
     try:
-        process = subprocess.Popen(update_command,stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        process = subprocess.Popen(update_command,stdout=sys.stdout, stderr=sys.stderr, universal_newlines=True)
         process.wait()
     except Exception as e:
-        print(f"Failed to download file from {bucket}/{key} to {temp_file_path} : {e}")
+        print(f"Failed to execute {' '.join(update_command)} : {e}")
     finally:
         if temp_file_path and os.path.exists(temp_file_path):
             os.remove(temp_file_path)
             print(f"Temporary file deleted: {temp_file_path}")
     return process
 
-def download_s3_and_update_image(bucket_file : str):
+def stream_s3_download_to_image_updater(bucket_file : str):
     """
     Download an S3 object to temp directory and use this to update the image
 
@@ -130,7 +129,7 @@ def download_s3_and_update_image(bucket_file : str):
     # Create an S3 client
     print(f'Obtaining temp credentials for file {bucket_file}')
     access_key_id, secrete_access_key, session_token = obtain_temporary_credentials()
-    update_command = 
+    update_command = IMAGE_UPDATE_STREAM_COMMAND
 
     bucket, key = bucket_file.replace("s3://", "").split("/", 1)
     print(f"Obtaining file from {bucket}/{key} and passing to {' '.join(update_command)}")
@@ -172,7 +171,7 @@ if __name__ == "__main__":
     if len(IMAGE_UPDATE_STREAM_COMMAND):
         process = stream_s3_download_to_image_updater(download_image)
     else:
-        process = downlad_s3_and_update_image(download_image)
+        process = download_s3_and_update_image(download_image)
 
     if process.returncode == 0:
         print("Rebooting to the new image in 1 minute")
