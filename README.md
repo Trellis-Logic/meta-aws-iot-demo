@@ -63,7 +63,7 @@ and run an AWS Job:
                 "name": "Update-Image",
                 "type": "runCommand",
                 "input": {
-                    "command": "/sbin/aws-iot-device-client-handlers/update-image.py,s3://rpi-demo-images/rpi-test-image.fw"
+                    "command": "/sbin/aws-iot-device-client-handlers/update-image.py,s3://your-bucket/your-update-file"
                 },
                 "runAsUser": "root"
             }
