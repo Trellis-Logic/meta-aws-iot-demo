@@ -23,13 +23,13 @@ git clone <path to repo>
 # Building
 
 ```
-./scripts/build-rpi3.sh
+./scripts/build-raspberrypi3.sh
 ```
 
 # Deploying
 
 ```
-sudo ./scripts/deploy-rpi3.sh /dev/sdX
+sudo ./scripts/deploy-raspberrypi3.sh /dev/sdX
 ```
 where /dev/sdx is the device corresponding to your installed USB
 
