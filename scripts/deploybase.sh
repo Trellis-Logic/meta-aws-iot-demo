@@ -12,7 +12,7 @@ if [ ! -b "$sdcard" ]; then
 fi
 cd $(dirname $0)/../
 base=$(basename $0 .sh)
-machine="${base##*-}"
+machine=$(echo $base | cut -d '-' -f 2-)
 if [ ! -z "${machine}" ]; then
     echo "building for machine ${machine}"
     export KAS_MACHINE=${machine}
