@@ -5,7 +5,8 @@ based build OS.
 
 # AWS Environment setup
 
-Refer to the wiki page at TODO for details on setting up your AWS account to support the 
+Refer to the [project wiki](https://github.com/Trellis-Logic/meta-aws-iot-demo/wiki) for details on setting up your AWS account
+to support this project.
 
 # Host Dependencies
 
