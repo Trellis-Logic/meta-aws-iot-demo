@@ -24,3 +24,8 @@ python __anonymous() {
        not d.getVar('AWS_CREDENTIALS_ENDPOINT', True).endswith("amazonaws.com"):
         bb.fatal("Please define AWS_CREDENTIALS_ENDPOINT in environment, in your local.conf, or in kas config.  See README for details")
 }
+
+FILES:${PN} += "/etc/aws-iot-device-client/aws-iot-device-client.conf"
+FILES:${PN} += "/etc/aws-iot-device-client/aws-environment.env"
+FILES:${PN} += "/etc/systemd/system/aws-iot-device-client.service.d"
+FILES:${PN} += "/etc/systemd/system/aws-iot-device-client.service.d/override.conf"
