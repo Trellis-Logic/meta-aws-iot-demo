@@ -16,13 +16,15 @@ do_install:append() {
 }
 
 python __anonymous() {
-    if d.getVar('AWSIOT_ENDPOINT', True).startswith("please") or \
+    if not d.getVar('AWSIOT_ENDPOINT', True) or \
+        d.getVar('AWSIOT_ENDPOINT', True).startswith("please") or \
         not d.getVar('AWSIOT_ENDPOINT', True).endswith("amazonaws.com"):
         bb.fatal("Please define AWSIOT_ENDPOINT in environment, in your local.conf, or in kas config.  See README for details")
 
-    if d.getVar('AWS_CREDENTIALS_ENDPOINT', True).startswith("please") or \
+    if not d.getVar('AWS_CREDENTIALS_ENDPOINT', True) or \
+       d.getVar('AWS_CREDENTIALS_ENDPOINT', True).startswith("please") or \
        not d.getVar('AWS_CREDENTIALS_ENDPOINT', True).endswith("amazonaws.com"):
-        bb.fatal("Please define AWS_CREDENTIALS_ENDPOINT in environment, in your local.conf, or in kas config.  See README for details")
+       bb.fatal("Please define AWS_CREDENTIALS_ENDPOINT in environment, in your local.conf, or in kas config.  See README for details")
 }
 
 FILES:${PN} += "/etc/aws-iot-device-client/aws-iot-device-client.conf"

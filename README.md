@@ -13,6 +13,7 @@ or in the shell environment used for the build
 ```
 export AWS_CREDENTIALS_ENDPOINT=<your credentials endpoint>
 export AWSIOT_ENDPOINT=<your iot endpoint>
+export BB_ENV_PASSTHROUGH_ADDITIONS="$BB_ENV_PASSTHROUGH_ADDITIONS AWSIOT_ENDPOINT AWS_CREDENTIALS_ENDPOINT"
 ```
 Where `AWS_CREDENTIALS_ENDPOINT` is found from the command `aws iot describe-endpoint --endpoint-type iot:CredentialProvider` in
 AWS Cloudshell or the aws command line and  `AWSIOT_ENDPOINT` is found in AWS Web console at AWSIoT->Settings.

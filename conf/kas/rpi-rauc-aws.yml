@@ -91,5 +91,3 @@ local_conf_header:
     INIT_MANAGER = "systemd"
     RAUC_TARGET_IMAGE ?= "rauc-aws-demo-image"
     ROOTFSPART_SIZE ?= "1G"
-    AWS_CREDENTIALS_ENDPOINT ?= "${AWS_CREDENTIALS_ENDPOINT}"
-    AWSIOT_ENDPOINT ?= "${AWSIOT_ENDPOINT}"
