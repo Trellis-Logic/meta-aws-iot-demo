@@ -26,7 +26,14 @@ git clone <path to repo>
 ```
 ./scripts/build-$machine.sh
 ```
-where $machine is the machine you are building for (currently supported are `raspberrypi3` or `raspberrypi4-64`)
+where `$machine` is the machine you are building for (currently supported are `raspberrypi3` or `raspberrypi4-64`)
+
+## Building with Docker
+
+```
+./scripts/build-docker $buildscript
+```
+where $buildscript is the `build-$machine.sh` script referenced above.
 
 # Deploying
 
