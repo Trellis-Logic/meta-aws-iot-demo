@@ -5,6 +5,9 @@ machine: raspberrypi3
 distro: poky
 target:
   - update-bundle
+env:
+  AWS_CREDENTIALS_ENDPOINT : "please define your credentials endpoint in environment"
+  AWSIOT_ENDPOINT : "please define your IOT endpoint in environment"
 
 repos:
   meta-aws-iot-demo:
@@ -88,6 +91,5 @@ local_conf_header:
     INIT_MANAGER = "systemd"
     RAUC_TARGET_IMAGE ?= "rauc-aws-demo-image"
     ROOTFSPART_SIZE ?= "1G"
-    AWS_CREDENTIALS_ENDPOINT ?= "please_define_in_localconf_or_env"
-    AWSIOT_ENDPOINT ?= "please_define_in_localconf_or_env"
-
+    AWS_CREDENTIALS_ENDPOINT ?= "${AWS_CREDENTIALS_ENDPOINT}"
+    AWSIOT_ENDPOINT ?= "${AWSIOT_ENDPOINT}"

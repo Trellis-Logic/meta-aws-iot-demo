@@ -14,3 +14,13 @@ do_install:append() {
     install -m 755 -d ${D}/etc/systemd/system/aws-iot-device-client.service.d/
     install -m 644 ${WORKDIR}/override.conf ${D}/etc/systemd/system/aws-iot-device-client.service.d/
 }
+
+python __anonymous() {
+    if d.getVar('AWSIOT_ENDPOINT', True).startswith("please") or \
+        not d.getVar('AWSIOT_ENDPOINT', True).endswith("amazonaws.com"):
+        bb.fatal("Please define AWSIOT_ENDPOINT in environment, in your local.conf, or in kas config.  See README for details")
+
+    if d.getVar('AWS_CREDENTIALS_ENDPOINT', True).startswith("please") or \
+       not d.getVar('AWS_CREDENTIALS_ENDPOINT', True).endswith("amazonaws.com"):
+        bb.fatal("Please define AWS_CREDENTIALS_ENDPOINT in environment, in your local.conf, or in kas config.  See README for details")
+}

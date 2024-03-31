@@ -8,6 +8,16 @@ based build OS.
 Refer to the [project wiki](https://github.com/Trellis-Logic/meta-aws-iot-demo/wiki) for details on setting up your AWS account
 to support this project.
 
+Add environment variables for your credentials and AWS IOT endpoints, either in the conf/kas/ yml file
+or in the shell environment used for the build
+```
+export AWS_CREDENTIALS_ENDPOINT=<your credentials endpoint>
+export AWSIOT_ENDPOINT=<your iot endpoint>
+```
+Where `AWS_CREDENTIALS_ENDPOINT` is found from the command `aws iot describe-endpoint --endpoint-type iot:CredentialProvider` in
+AWS Cloudshell or the aws command line and  `AWSIOT_ENDPOINT` is found in AWS Web console at AWSIoT->Settings.
+Both of these strings should end with "amazonaws.com"
+
 # Host Dependencies
 
 * Install [yocto dependencies](https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html#build-host-packages).
@@ -57,7 +67,7 @@ Then, use the path to this zip file as shown below.
 
 # Remote device update using AWS Jobs
 
-1. Follow the instructions in [TBD] to setup policies and IAM roles
+1. Follow the instructions in the [project wiki](https://github.com/Trellis-Logic/meta-aws-iot-demo/wiki) to setup policies and IAM roles
 which allow fetch from S3 bucket using credentials obtained from
 device key and cert.
 2. Upload this job document to an S3 bucket and use it to create
