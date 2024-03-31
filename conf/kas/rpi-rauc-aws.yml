@@ -46,14 +46,14 @@ repos:
   meta-rauc-community:
     url: https://github.com/Trellis-Logic/meta-rauc-community
     path: layers/meta-rauc-community
-    refspec: kirkstone+rpi-tweaks
+    refspec: kirkstone+rpi-use-machine-var
     layers:
       meta-rauc-raspberrypi:
 
   meta-aws:
     url: https://github.com/Trellis-Logic/meta-aws
     path: layers/meta-aws
-    refspec: kirkstone+add-st-back-in
+    refspec: kirkstone-next+add-st-back-in
 
 bblayers_conf_header:
   standard: |
