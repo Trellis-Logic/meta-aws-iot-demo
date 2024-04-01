@@ -66,30 +66,7 @@ Then, use the path to this zip file as shown below.
 ./scripts/setup-device-certs <path to zip> <device IP>
 ```
 
-# Remote device update using AWS Jobs
+# SSH and Device Update
 
-1. Follow the instructions in the [project wiki](https://github.com/Trellis-Logic/meta-aws-iot-demo/wiki) to setup policies and IAM roles
-which allow fetch from S3 bucket using credentials obtained from
-device key and cert.
-2. Upload this job document to an S3 bucket and use it to create
-and run an AWS Job:
-```
-{
-    "_comment": "This sample JSON file can be used for performing an image update on a device.",
-    "version": "1.0",
-    "steps": [
-        {
-            "action": {
-                "name": "Update-Image",
-                "type": "runCommand",
-                "input": {
-                    "command": "/sbin/aws-iot-device-client-handlers/update-image.py,s3://your-bucket/your-update-file"
-                },
-                "runAsUser": "root"
-            }
-        }
-    ]
-}
-```
-Where `s3://your-bucket/your-update-file` is the S3 URI of an update image file found in the
-build artifacts.
+Follow the instructions in [the wiki](https://github.com/Trellis-Logic/meta-aws-iot-demo/wiki) to configure and
+demo AWS features.
