@@ -51,9 +51,9 @@ repos:
       meta-rauc-raspberrypi:
 
   meta-aws:
-    url: https://github.com/Trellis-Logic/meta-aws
+    url: https://github.com/aws4embeddedlinux/meta-aws.git
     path: layers/meta-aws
-    refspec: kirkstone-next+add-st-back-in
+    refspec: kirkstone-next
 
 bblayers_conf_header:
   standard: |
