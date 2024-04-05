@@ -44,9 +44,9 @@ repos:
     branch: kirkstone
  
   meta-rauc-community:
-    url: https://github.com/Trellis-Logic/meta-rauc-community
+    url: https://github.com/rauc/meta-rauc-community
     path: layers/meta-rauc-community
-    branch: kirkstone+rpi-use-machine-var
+    branch: kirkstone
     layers:
       meta-rauc-raspberrypi:
 
