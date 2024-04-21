@@ -1,0 +1,51 @@
+header:
+  version: 14
+  includes:
+    - repo: tegra-demo-distro
+      file: layers/meta-tegrademo/dynamic-layers/meta-swupdate/conf/kas/swupdate-oe4t.yml
+
+env:
+  AWS_CREDENTIALS_ENDPOINT : "please define your credentials endpoint in environment"
+  AWSIOT_ENDPOINT : "please define your IOT endpoint in environment"
+
+
+repos:
+  meta-aws-iot-demo:
+    path: meta-aws-iot-demo
+
+  tegra-demo-distro:
+    url: https://github.com/Trellis-Logic/tegra-demo-distro.git
+    path: tegra-demo-distro
+    layers:
+      .: disabled
+    branch: master+swupdate-kas
+
+  meta-aws:
+    url: https://github.com/aws4embeddedlinux/meta-aws.git
+    path: layers/meta-aws
+    branch: master
+
+  meta-openembedded:
+    url: http://git.openembedded.org/meta-openembedded
+    path: layers/meta-openembedded
+    branch: master
+    layers:
+      meta-oe:
+      meta-multimedia:
+
+
+
+local_conf_header:
+  reduce_diskspace: |
+    INHERIT += "rm_work_and_downloads"
+  diskmon: |
+    BB_DISKMON_DIRS = "\
+        STOPTASKS,${TMPDIR},1G,100K \
+        STOPTASKS,${DL_DIR},1G,100K \
+        STOPTASKS,${SSTATE_DIR},1G,100K \
+        STOPTASKS,/tmp,100M,100K \
+        HALT,${TMPDIR},100M,1K \
+        HALT,${DL_DIR},100M,1K \
+        HALT,${SSTATE_DIR},100M,1K \
+        HALT,/tmp,10M,1K"
+
